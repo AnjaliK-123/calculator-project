@@ -96,6 +96,8 @@ class Calculator {
         this.previousOperand = '';
         //reset again
         this.shouldReset = true;
+        // update display
+        this.updateDisplay();
     }
     // display logic 
     updateDisplay() {
