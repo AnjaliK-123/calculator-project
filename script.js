@@ -7,7 +7,7 @@ class Calculator {
     
     constructor() {
         // getting the dom elements 
-        this.display = document.querySelector("#display");
+        this.display = document.querySelector("#display-screen");
         // intializing calculator state 
         this.currentOperand = "";
         this.previousOperand = "";
@@ -26,6 +26,10 @@ class Calculator {
             this.currentOperand = "";
             this.shouldReset = false;
         }
+        
+        // append the number
+        this.currentOperand = this.currentOperand.toString() + number;
+        this.updateDisplay();
     }
 
     // handle operations 
@@ -110,39 +114,46 @@ class Calculator {
         this.operation = null;
         this.updateDisplay();
     }
+    // format number for display
+    formatNumber(number) {
+        if (number === '') return '';
+        if (number === 'Error') return 'Error';
+        const stringNumber = number.toString();
+        return stringNumber;
+    }
+
     // initialize  calculator 
     initializeCalculators() {
-    // number buttons clicked
-    document.querySelectorAll('[data-number]').forEach(button => {
-        button.addEventListener('click', () => {
-            this.appendNumber(button.textContent);
+        // number buttons clicked
+        document.querySelectorAll('[data-number]').forEach(button => {
+            button.addEventListener('click', () => {
+                this.appendNumber(button.textContent);
+            });
         });
-    });
 
-    // operator buttons clicked
-    document.querySelectorAll('[data-operation]').forEach(button => {
-        button.addEventListener('click', () => {
-            this.chooseOperation(button.textContent);
+        // operator buttons clicked
+        document.querySelectorAll('[data-operation]').forEach(button => {
+            button.addEventListener('click', () => {
+                this.chooseOperation(button.textContent);
+            });
         });
-    });
 
-    // equals button clicked
+        // equals button clicked
         document.querySelectorAll('[data-equals]').forEach(button => {
             button.addEventListener('click', () => {
                 this.compute();
             });
         });
 
-            // clear button clicked
-            document.querySelectorAll('[data-clear]').forEach(button => {
-                button.addEventListener('click', () => {
-                    this.clear();
-                });
+        // clear button clicked
+        document.querySelectorAll('[data-clear]').forEach(button => {
+            button.addEventListener('click', () => {
+                this.clear();
             });
-     
-            // create calculator instance and initialize
-            const calculator = new Calculator();
-            calculator.initializeCalculators();
-
- }
+        });
+    }
 }
+
+// create calculator instance and initialize
+const calculator = new Calculator();
+calculator.initializeCalculators();
