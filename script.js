@@ -104,7 +104,8 @@ class Calculator {
 
         //show operation if exists
         if (this.operation != null) {
-            this.display.value = `${this.formatNumber(this.previousOperand)} ${this.operation}`;
+            this.display.value = `${this.formatNumber(this.previousOperand)} ${this.operation} ${this.formatNumber(this.currentOperand)}`;
+            
         }     
     }
     // clear logic 
